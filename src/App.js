@@ -12,18 +12,32 @@ class App extends React.Component {
     this.state ={
       inventory: []
     }
+
+    this.componentDidMount = this.componentDidMount.bind(this)
   }
 
   componentDidMount(){
-    axios.get()
+    axios.get('/api/inventory').then(res => {
+      this.setState({inventory: res.data})
+    })
+    .catch(err => {
+      console.log(err)
+      alert('There was a problem connecting to the server')
+    })
   }
-
+  
   render() {
     return (
       <div className="App">
         <Header />
-        <Dashboard />
-        <Form />
+        <div className='main-section'>
+          <Dashboard
+            inventory={this.state.inventory}
+          />
+          <Form
+            rerender={this.componentDidMount}
+          />
+          </div>
       </div>
     );
   }

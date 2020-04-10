@@ -1,11 +1,14 @@
 import React from 'react'
 import Product from './Product'
 
-function Dashboard() {
+function Dashboard(props) {
+  const products = props.inventory.map(product => {
+    return <Product key={product.id} product={product}/>
+  })
+
   return (
-    <div>
-      Dashboard.js
-      <Product />
+    <div className='inventory'>
+      {products}
     </div>
   )
 }
