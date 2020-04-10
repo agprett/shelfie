@@ -10,15 +10,27 @@ class App extends React.Component {
   constructor() {
     super()
     this.state ={
-      inventory: []
+      inventory: [],
+      editing: {}
     }
 
     this.componentDidMount = this.componentDidMount.bind(this)
+    this.deleteProduct = this.deleteProduct.bind(this)
   }
 
   componentDidMount(){
     axios.get('/api/inventory').then(res => {
       this.setState({inventory: res.data})
+    })
+    .catch(err => {
+      console.log(err)
+      alert('There was a problem connecting to the server')
+    })
+  }
+
+  deleteProduct(id){
+    axios.delete(`/api/inventory/${id}`).then(() => {
+      this.componentDidMount()
     })
     .catch(err => {
       console.log(err)
@@ -33,6 +45,7 @@ class App extends React.Component {
         <div className='main-section'>
           <Dashboard
             inventory={this.state.inventory}
+            delete={this.deleteProduct}
           />
           <Form
             rerender={this.componentDidMount}

@@ -11,6 +11,8 @@ app.use(express.json())
 
 app.get('/api/inventory', controller.getAll)
 app.post('/api/product', controller.createProduct)
+app.delete('/api/inventory/:id', controller.deleteProduct)
+app.put('/api/inventory/:id', controller.updateProduct)
 
 massive({
   connectionString: CONNECTION_STRING,

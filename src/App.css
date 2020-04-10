@@ -60,7 +60,7 @@
   background-color: #3AD886;
   border-radius: 10px;
   position: fixed;
-  right: 15%;
+  left: 55%;
   top: 150px;
   display: flex;
   flex-direction: column;
@@ -74,8 +74,8 @@
 
 .cancel {
   position: relative;
-  top: 20px;
   left: 15px;
+  top: 40px;
   width: min-content;
   padding: 0px 10px;
   border: none;
@@ -85,12 +85,11 @@
 
 .add {
   position: relative;
-  top: 20px;
-  right: 15px;
-  width: min-content;
+  left: 250px;
+  bottom: 15px;
+  width: 150px;
   padding: 0px 10px;
   border: none;
   border-radius: 10px;
   background-color: #ED6B5A;
-
 }

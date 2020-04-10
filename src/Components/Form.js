@@ -66,7 +66,7 @@ class Form extends React.Component {
           value={this.state.price}
           />
         <button className='cancel' onClick={() => this.resetHandler()}><h2>Cancel</h2></button>
-        <button className='add' onClick={() => this.addProduct(this.state.name, this.state.price, this.state.imgurl)}>Add Inventory</button>
+        <button className='add' onClick={() => this.addProduct(this.state.name, this.state.price, this.state.imgurl)}><h2>Add Inventory</h2></button>
       </div>
     )
   }

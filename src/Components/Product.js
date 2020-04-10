@@ -10,6 +10,8 @@ function Product(props) {
       />
       <h2>{props.product.name}</h2>
       <h3>${props.product.price}</h3>
+      <button onClick={() => props.delete(props.product.id)}>Delete</button>
+      <button>Update</button>
     </div>
   )
 }
