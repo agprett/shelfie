@@ -2,9 +2,15 @@ module.exports = {
   getAll: (req, res) => {
     const db = req.app.get('db')
 
-    db.get_inventory().then(inventory => {
-      res.status(200).send(inventory)
-    })
+    if(req.query.id){
+      db.get_one(req.query.id).then(product => {
+        res.status(200).send(product)
+      })
+    } else {
+      db.get_inventory().then(inventory => {
+        res.status(200).send(inventory)
+      })
+    }
   },
 
   createProduct: (req, res) => {

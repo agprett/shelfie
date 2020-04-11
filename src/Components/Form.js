@@ -10,10 +10,25 @@ class Form extends React.Component {
       imgurl: ''
     }
     
+    this.componentDidUpdate = this.componentDidUpdate.bind(this)
     this.resetHandler = this.resetHandler.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.addProduct = this.addProduct.bind(this)
   }
 
+  componentDidUpdate(prevProps){
+    if(this.props.edittingProduct !== prevProps.edittingProduct){
+      axios.get(`/api/inventory/?id=${this.props.edittingProduct}`)
+      .then(res => {
+        this.setState({name: res.data[0].name, price: res.data[0].price, imgurl: res.data[0].img})
+      })
+      .catch(err => {
+        console.log(err)
+        alert('There was a problem connecting to the server')
+      })
+    }
+  }
+  
   resetHandler() {
     this.setState({
       name: '',
@@ -27,19 +42,24 @@ class Form extends React.Component {
   }
 
   addProduct(name, price, img){
-    axios.post('/api/product', {name, price, img})
-    .then(() => this.props.rerender())
-    .catch(err => {
-      console.log(err)
-      alert('There was a problem connecting to the server')
-    })
-    this.setState({
-      name: '',
-      price: 0,
-      imgurl: ''
-    })
+    if(this.props.edittingProduct !== 0){
+      axios.put(`/api/inventory/${this.props.edittingProduct}`, {name, price, img})
+      .then(() => this.props.rerender())
+      .catch(err => {
+        console.log(err)
+        alert('There was a problem connecting to the server')
+      })
+    } else {
+      axios.post('/api/product', {name, price, img})
+      .then(() => this.props.rerender())
+      .catch(err => {
+        console.log(err)
+        alert('There was a problem connecting to the server')
+      })
+    }
+    this.resetHandler()
   }
-
+  
   render(){
     return (
       <div className='form'>
@@ -62,6 +82,7 @@ class Form extends React.Component {
           />
         Price:
         <input
+          name='price'
           onChange={event => this.handleChange(event)}
           value={this.state.price}
           />
