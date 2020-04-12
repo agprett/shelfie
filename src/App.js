@@ -54,10 +54,12 @@ class App extends React.Component {
             delete={this.deleteProduct}
             getUpdate={this.getUpdate}
           />
-          <Form
-            rerender={this.componentDidMount}
-            edittingProduct={this.state.edittingProduct}
-          />
+          <div className='form-backing'>
+            <Form
+              rerender={this.componentDidMount}
+              edittingProduct={this.state.edittingProduct}
+            />
+          </div>
           </div>
       </div>
     );

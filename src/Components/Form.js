@@ -64,30 +64,44 @@ class Form extends React.Component {
     return (
       <div className='form'>
         <img
-          className='form=img'
+          className='form-img'
           src={this.state.imgurl ? `${this.state.imgurl}` : 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTKOmHNxnOQuvVSoUnFWg6-PEIbUviw_a88siDC1KCIgYEUTAya&usqp=CAU'}
           alt='Not available'
         />
-        Image URL:
-        <input
-          name='imgurl'
-          onChange={event => this.handleChange(event)}
-          value={this.state.imgurl}
-        />
-        Product Name:
-        <input
-          name='name'
-          onChange={event => this.handleChange(event)}
-          value={this.state.name}
+        <div className='form-inputs'>
+          <div className='form-words'>
+            Image URL:
+          </div>
+          <input
+            name='imgurl'
+            onChange={event => this.handleChange(event)}
+            value={this.state.imgurl}
           />
-        Price:
-        <input
-          name='price'
-          onChange={event => this.handleChange(event)}
-          value={this.state.price}
+          <div className='form-words'>
+            Poduct Name:
+          </div>
+          <input
+            name='name'
+            onChange={event => this.handleChange(event)}
+            value={this.state.name}
           />
-        <button className='cancel' onClick={() => this.resetHandler()}><h2>Cancel</h2></button>
-        <button className='add' onClick={() => this.addProduct(this.state.name, this.state.price, this.state.imgurl)}><h2>Add Inventory</h2></button>
+          <div className='form-words'>
+            Price:
+          </div>
+          <input
+            name='price'
+            onChange={event => this.handleChange(event)}
+            value={this.state.price}
+          />
+        </div>
+        <div className='form-buttons'>
+          <div>
+            <button className='form-button' onClick={() => this.resetHandler()}><p>Cancel</p></button>
+          </div>
+          <div>
+            <button className='form-button' onClick={() => this.addProduct(this.state.name, this.state.price, this.state.imgurl)}><p>Add to Inventory</p></button>
+          </div>
+        </div>
       </div>
     )
   }
